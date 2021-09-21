@@ -122,7 +122,7 @@
                  <br />
                  <br />
 
-                 <asp:Button ID="signup"  class="signup_Button" runat="server" Text="Sign up"  BackColor="#0099FF" BorderColor="Black" Height="51px" ToolTip="Click here to signup" Width="113px" />
+                 <asp:Button ID="signup"  class="signup_Button" runat="server" Text="Sign up"  BackColor="#0099FF" BorderColor="Black" Height="51px" ToolTip="Click here to signup" Width="113px"  OnClick="signup_Click" />
                 <br/>
                  <br/>
 
