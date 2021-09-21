@@ -69,6 +69,8 @@
   <ItemGroup>
     <Content Include="Home.aspx" />
     <Content Include="images\1.jpg" />
+    <Content Include="images\logo.jpg" />
+    <Content Include="images\logo.png" />
     <Content Include="Login.aspx" />
     <Content Include="Register.aspx" />
     <Content Include="Web.config" />

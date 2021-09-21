@@ -23,6 +23,7 @@
             font-size:large;
             font-weight:500;
             margin-left: 0px;
+            cursor:pointer;
         }
         .login_con {
             margin-top:7%;

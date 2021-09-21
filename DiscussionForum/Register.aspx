@@ -23,6 +23,7 @@
                 font-size:large;
                 font-weight:500;
                 margin-left: 10%;
+                cursor:pointer;
         }
         .signup_con {
             margin-top:7%;
