@@ -12,11 +12,21 @@ namespace DiscussionForum
         protected void Page_Load(object sender, EventArgs e)
         {
 
+
+            username.Text = (Session["fname"].ToString() + Session["lname"].ToString());
+            university.Text=(Session["university"].ToString());
+            avatar.ImageUrl = (Session["avatar"].ToString());
+
+            username1.Text = (Session["fname"].ToString() + Session["lname"].ToString());
+            university1.Text = (Session["university"].ToString());
+
+            
+
         }
 
-        protected void Unnamed1_SelectedIndexChanged(object sender, EventArgs e)
+        protected void cardbutton_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("UserProfile.aspx");
         }
     }
 }

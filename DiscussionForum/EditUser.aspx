@@ -1,11 +1,13 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="DiscussionForum.Register" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="EditUser.aspx.cs" Inherits="DiscussionForum.EditUser" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+
+      <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <style>
          * {
             margin:0;
@@ -53,14 +55,14 @@
         </style>
 </head>
 <body>
-    <div class="login_img">
+       <div class="login_img">
         <img alt="loginImg" class="auto-style1" src="images/1.jpg"  />
     <form id="form1" runat="server">
        
              <div class="container">
                  <div class="signup_con">
                      
-                 <h1>Register</h1>
+                 <h1>Update</h1>
                  <br/>
                   <br/>
                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -118,34 +120,16 @@
 
                  
 
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                 <asp:Label ID="Label5" runat="server" Text=""><i class="fas fa-lock icons"></i></asp:Label>
-                 &nbsp;&nbsp;&nbsp;&nbsp;
-                 <asp:TextBox ID="pass" runat="server"  BorderStyle="Groove"  placeholder="Password" class="input_dec"></asp:TextBox>
-
-                 <br />
-                 <br />
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                 <asp:Label ID="Label6" runat="server" Text=""><i class="fas fa-lock icons"></i></asp:Label>
-                 &nbsp;&nbsp;&nbsp;&nbsp;
-                 <asp:TextBox ID="repass" runat="server"  BorderStyle="Groove"  placeholder="Re-enter Password" class="input_dec"></asp:TextBox>
-
-                 <br />
-                 <br />
-
-                 <asp:Button ID="signup"  class="signup_Button" runat="server" Text="Sign up"  BackColor="#0099FF" BorderColor="Black" Height="51px" ToolTip="Click here to signup" Width="113px"  OnClick="signup_Click" />
+                 <asp:Button ID="signup"  class="signup_Button" runat="server" Text="Update"  BackColor="#0099FF" BorderColor="Black" Height="51px" ToolTip="Click here to update" Width="113px"  OnSubmitBehaviour="false" OnClick="update_Click1"/>
                 <br/>
                  <br/>
 
 
-                 <asp:Label ID="register" runat="server" Text="Already Have An Account?? " style="font-size:large; margin-left:6%"></asp:Label>
-                <asp:HyperLink ID="HyperLink1" runat="server" style="font-size:large " NavigateUrl="Login.aspx">Login</asp:HyperLink>
+               
                  </div>
                  </div>
                  </form>
              </div>
-        
-    
 </body>
 </html>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -20,22 +21,39 @@ namespace DiscussionForum
         {
             SqlConnection con = new SqlConnection();
             con.ConnectionString = WebConfigurationManager.ConnectionStrings["ConTest"].ConnectionString;
+
             try
             {
                 using (con)
                 {
+
+                    
                     String query = "SELECT * FROM UserDetails WHERE uname= '" + username.Text+"' and pass='"+pass.Text+"'";
-                    SqlCommand cmd = new SqlCommand(query, con);
+                    SqlDataAdapter da;
+                    DataTable dt = new DataTable();
+                    DataRow dr;
                     con.Open();
-                    SqlDataReader rdr = cmd.ExecuteReader();
-                   // System.Diagnostics.Debug.WriteLine(rdr);
-                    if (rdr.Read()){
-                       
-                            Response.Redirect("Home.aspx");
-                    }else{
+                    da = new SqlDataAdapter(query, con);
+                    
+                    da.Fill(dt);
+                    if (dt.Rows.Count != 0)
+                    {
+                        dr = dt.Rows[0];
+                        Session["id"] = Convert.ToInt32(dr["Id"]);
+                        Session["fname"] = Convert.ToString(dr["fname"]);
+                        Session["lname"] = Convert.ToString(dr["lname"]);
+                        Session["email"] = Convert.ToString(dr["email"]);
+                        Session["contact"] = Convert.ToString(dr["contact"]);
+                        Session["uname"] = Convert.ToString(dr["uname"]);
+                        Session["university"] = Convert.ToString(dr["university"]);
+                        Session["avatar"] = Convert.ToString(dr["avatar"]);
+                        Response.Redirect("Home.aspx");
+
+                    }
+                    else{
                         Response.Write("<script>alert('Username or Password Incorrect')</script>");
                     }
-                    cmd.Dispose();
+      
                     con.Close();
                 }
 

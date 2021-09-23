@@ -22,8 +22,8 @@
 
             }
             .active{  
-             overflow: hidden;
-             background-color:darkslateblue;
+              overflow: hidden;
+              background-color:darkslateblue;
               display: flex;
               width: 100%;
               height: 9vh;
@@ -41,21 +41,18 @@
               text-decoration: none;
               font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
               font-size:x-large;
-              
-             
-
             }
              .nav:hover {
                  background-color: rgb(40 31 91);
-                }
+             }
             .navitem {
                
             }
             .search {
-            padding:2%;
-            border-radius:0.4vw;
-            font-weight:300;
-            width:30vw;
+                padding:2%;
+                border-radius:0.4vw;
+                font-weight:300;
+                width:30vw;
             }
 
             .search_pos {
@@ -100,7 +97,7 @@
                 border-radius:50%;
                 width:8vw;
                 height:16vh;
-
+                 object-fit:cover;
             }
             .user_dec {
              margin:2%;
@@ -137,12 +134,13 @@
             .que_post {
                
                 display:flex; 
-                margin-right:10%;
+                align-items:center;
                 height:5vh;
+                text-align:center;
                
             }
             .que_btn {
-              background-color:white;
+              background-color:gainsboro;
                 border:none;
               margin-left:3%;
                 cursor:pointer;
@@ -164,6 +162,7 @@
                 margin-right:1%;
                 border:2px solid black;
                border-radius:0.4vw;
+               padding:1%;
               
             }
             .list_cat {
@@ -176,7 +175,7 @@
                 border:1px solid black;
                 padding:2%;
                 border-radius:13px;
-                
+               
             }
             .post_user{
                 display:flex;
@@ -218,6 +217,16 @@
                 background-color:white;
                 cursor:pointer;
             }
+
+            .search_con {
+                border:1px solid black;
+                padding:2%;
+                border-radius:10px;
+                width:87%;
+                margin-top:1.5%;
+                box-shadow:4px 6px 4px 4px #888888;
+                background-color:gainsboro;
+            }
         </style>
 
 </head>
@@ -228,62 +237,57 @@
 
       <div class="active">
           <div>
-
-            <img alt="loginImg" class="auto-style1" src="images/logo.png"  />
-
-          </div>
-            
+               <img alt="loginImg" class="auto-style1" src="images/logo.png"  />
+          </div>        
           <div class="navitem">
-          <asp:BulletedList ID="BulletedList1" runat="server" >
-                
-                 <asp:ListItem Value="http://www.cohowinery.com" class="nav">Home</asp:ListItem>
-                 <asp:ListItem Value="http://www.cohowinery.com" class="nav">Post</asp:ListItem>
-                 <asp:ListItem Value="http://www.cohowinery.com" class="nav">Profile</asp:ListItem>
-          </asp:BulletedList>
-          </div>
-
+                <asp:BulletedList ID="BulletedList1" runat="server" >
+                    <asp:ListItem Value="http://www.cohowinery.com" class="nav">Home</asp:ListItem>
+                    <asp:ListItem Value="http://www.cohowinery.com" class="nav">Post</asp:ListItem>
+                    <asp:ListItem Value="http://www.cohowinery.com" class="nav">Profile</asp:ListItem>
+                </asp:BulletedList>
+          </div>     
           <div class="search_pos">
-
               <asp:TextBox ID="TextBox1" runat="server" class="search" placeholder="Search here..."></asp:TextBox>
               <button class="bsearch"><i class="fas fa-search search_button"></i></button>
-            
           </div>
       </div>
 
      <div class="main_container">
 
         <div class="container">
-            <img alt="loginImg" class="img_card" src="images/1.jpg"  />
-            <div class="userdetails">
-                <h1 class="user_dec">Vrundan Shah</h1>
-                <h2 class="user_dec">Dharmsinh Desai University</h2>
+            
+            <asp:Image ID="avatar" runat="server"  class="img_card"  />
+             <div class="userdetails">
+                <h1 class="user_dec"><asp:Label ID="username1" runat="server" Text=""></asp:Label></h1>
+                <h2 class="user_dec"><asp:Label ID="university1" runat="server" Text=""></asp:Label></h2>
             </div>
 
-             <button id="cardbutton" class="Card_Button">View Profile</button>
+            
+            <asp:Button ID="cardbutton"    class="Card_Button"    runat="server" Text="View Profile"   OnClick="cardbutton_Click" />
        </div>
 
 
-<div class="post_container">
-
-        <div class="que_post">
+      <div class="post_container">
+             <div class="search_con">
+                  <div class="que_post">
       
-            <asp:DropDownList class="category" ID="que_category" runat="server">
-
-                 <asp:ListItem Value="Choose Category" class="list_cat" Selected="True">Choose Category</asp:ListItem>
-                 <asp:ListItem Value="Education" class="list_cat">Education</asp:ListItem>
-                 <asp:ListItem Value="Sports" class="list_cat">Sports</asp:ListItem>
-                 <asp:ListItem Value="Games" class="list_cat">Games</asp:ListItem>
-                 <asp:ListItem Value="Music" class="list_cat">Music</asp:ListItem>
-                 <asp:ListItem Value="Health" class="list_cat">Health & Fitness</asp:ListItem>
-                 <asp:ListItem Value="Business" class="list_cat">Business</asp:ListItem>
-                 <asp:ListItem Value="Food" class="list_cat">Food</asp:ListItem>
-                 <asp:ListItem Value="Science" class="list_cat">Science and Tech</asp:ListItem>
-                 <asp:ListItem Value="Fashion" class="list_cat">Fashion & style</asp:ListItem>
-                <asp:ListItem Value="Travel" class="list_cat">Travel</asp:ListItem>
-            </asp:DropDownList>
-            <asp:TextBox ID="question" runat="server"  class="que_input" placeholder="Add Question"></asp:TextBox>
+                        <asp:DropDownList class="category" ID="que_category" runat="server">     
+                             <asp:ListItem Value="Choose Category" class="list_cat" Selected="True">Choose Category</asp:ListItem>
+                             <asp:ListItem Value="Education" class="list_cat">Education</asp:ListItem>
+                             <asp:ListItem Value="Sports" class="list_cat">Sports</asp:ListItem>
+                             <asp:ListItem Value="Games" class="list_cat">Games</asp:ListItem>
+                             <asp:ListItem Value="Music" class="list_cat">Music</asp:ListItem>
+                             <asp:ListItem Value="Health" class="list_cat">Health & Fitness</asp:ListItem>
+                             <asp:ListItem Value="Business" class="list_cat">Business</asp:ListItem>
+                             <asp:ListItem Value="Food" class="list_cat">Food</asp:ListItem>
+                             <asp:ListItem Value="Science" class="list_cat">Science and Tech</asp:ListItem>
+                             <asp:ListItem Value="Fashion" class="list_cat">Fashion & style</asp:ListItem>
+                            <asp:ListItem Value="Travel" class="list_cat">Travel</asp:ListItem>
+                        </asp:DropDownList>          
+                    <asp:TextBox ID="question" runat="server"  class="que_input" placeholder="Add Question"></asp:TextBox>
            
-            <button id="que_btn" class="que_btn" title="POST" ><i class="fas fa-pen q_icon"></i></button>
+               <button id="que_btn" class="que_btn" title="POST" ><i class="fas fa-pen q_icon"></i></button>
+            </div>
        </div>
 
 
@@ -292,14 +296,14 @@
               <div class="post_header">
                   <img alt="loginImg" class="post_img" src="images/1.jpg"  />
                   <div class="post_user">
-                    <h3>Vrundan</h3>
-                    <p>Dharmsinh Desai University</p>
+                    <h3><asp:Label ID="username" runat="server" Text=""></asp:Label></h3>
+                    <p><asp:Label ID="university" runat="server" Text=""></asp:Label></p>
                   </div>
                 
                 </div>
               <hr/>
                <div class="post_body">
-                    <h2>abdcacvodgjiodgjeridogjdgjre9jbolxcbm jof?</h2>
+                    <h2>If tachyon particles are faster than the speed of light, then how much more is the speed of tachyon particles than light?</h2>
                </div>
               
                <div class="post_footer">
