@@ -68,13 +68,13 @@
             <br />
             <br/>
         
-             <asp:Label ID="PassLabel" runat="server" Text="Passward"> <i class="fas fa-lock icons"></i></asp:Label>
+            <asp:Label ID="PassLabel" runat="server" Text="Passward"> <i class="fas fa-lock icons"></i></asp:Label>
             <asp:TextBox ID="pass" runat="server" BorderStyle="Groove" Height="33px" Width="286px" style="margin-left: 0px" class="input_dec" placeholder="Password"></asp:TextBox>
             <br />
             <br/>
             <asp:Button class="login_Button" ID="loginButton" runat="server" Text="Login" BackColor="#0099FF" BorderColor="Black" Height="51px" ToolTip="Click here to Login" Width="113px"   onClick="loginButton_Click"/>
-               <br/>
-                <br/>
+             <br/>
+             <br/>
                   <asp:Label ID="register" runat="server" Text="New User?? " style="font-size:large" ></asp:Label>
                 <asp:HyperLink ID="signup" runat="server" style="font-size:large" NavigateUrl="Register.aspx">Sign up</asp:HyperLink>
              </div>

@@ -42,6 +42,15 @@ namespace DiscussionForum
         protected global::System.Web.UI.WebControls.Label username;
 
         /// <summary>
+        /// Button1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton Button1;
+
+        /// <summary>
         /// fullname control.
         /// </summary>
         /// <remarks>
@@ -69,6 +78,15 @@ namespace DiscussionForum
         protected global::System.Web.UI.WebControls.Label email;
 
         /// <summary>
+        /// myfile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload myfile;
+
+        /// <summary>
         /// img_btn control.
         /// </summary>
         /// <remarks>
@@ -76,14 +94,5 @@ namespace DiscussionForum
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlButton img_btn;
-
-        /// <summary>
-        /// edit_btn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton edit_btn;
     }
 }

@@ -5,6 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+  
     <title>
     </title>
          
@@ -41,9 +42,13 @@
               text-decoration: none;
               font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
               font-size:x-large;
+              background-color:darkslateblue;
+              border:none;
+              
             }
              .nav:hover {
                  background-color: rgb(40 31 91);
+               
              }
             .navitem {
                
@@ -140,10 +145,13 @@
                
             }
             .que_btn {
-              background-color:gainsboro;
+              background-color:darkslateblue;
+              color:white;
                 border:none;
-              margin-left:3%;
+                margin-left:3%;
                 cursor:pointer;
+                padding:1%;
+                border-radius:5px;
             }
             .que_input {
                   
@@ -158,6 +166,7 @@
               font-size:x-large;
                
             }
+             
             .category {
                 margin-right:1%;
                 border:2px solid black;
@@ -171,10 +180,13 @@
             
             .post_main {
                 margin-top:5%;
-                width:87%;
+                width:40vw;
                 border:1px solid black;
                 padding:2%;
                 border-radius:13px;
+                margin-left:10%;
+               
+                
                
             }
             .post_user{
@@ -191,6 +203,10 @@
             .post_body {
                 margin-top:3%;
                 margin-bottom:3%;
+                max-height:50vh;
+        
+                overflow:hidden;
+                object-fit:contain;
                 
             }
             .post_footer {
@@ -227,7 +243,59 @@
                 box-shadow:4px 6px 4px 4px #888888;
                 background-color:gainsboro;
             }
+            .que_btn:hover {
+                background-color: rgb(40 31 91);
+                
+            }
+
+            .file-upload {
+              cursor: pointer;      
+            }
+
+            .file-upload input {
+              top: 0;
+              left: 0;
+              margin: 0;
+              /* Loses tab index in webkit if width is set to 0 */
+              opacity: 0;
+              filter:alpha(opacity=0);
+            }
+            .upload {
+              margin-top:2%;
+              margin-left:5%;
+              display:flex;
+              justify-content:space-evenly;
+              margin-right:2%;
+            }
+
+
+            .que_img {
+               object-fit:contain;
+               height:60vh;
+                
+                 
+            }
+            .que_img_pos {
+              align-content:center; 
+              margin-top:2%;
+
+
+             }
+
+            
         </style>
+
+
+        <script>
+
+
+
+            document.querySelector('img.que_img').addEventListener('load', function ( e) {
+                // The image is ready!
+                if
+            });
+
+        </script>
 
 </head>
 <body>
@@ -249,7 +317,10 @@
           <div class="search_pos">
               <asp:TextBox ID="TextBox1" runat="server" class="search" placeholder="Search here..."></asp:TextBox>
               <button class="bsearch"><i class="fas fa-search search_button"></i></button>
+             
           </div>
+          <asp:Button ID="logout" runat="server" Text="Logout"  class="nav" OnClick="logout_Click"/>
+
       </div>
 
      <div class="main_container">
@@ -272,7 +343,7 @@
                   <div class="que_post">
       
                         <asp:DropDownList class="category" ID="que_category" runat="server">     
-                             <asp:ListItem Value="Choose Category" class="list_cat" Selected="True">Choose Category</asp:ListItem>
+                             <asp:ListItem Value="ChooseCategory" class="list_cat" ID="default_cat" Selected="True">Choose Category</asp:ListItem>
                              <asp:ListItem Value="Education" class="list_cat">Education</asp:ListItem>
                              <asp:ListItem Value="Sports" class="list_cat">Sports</asp:ListItem>
                              <asp:ListItem Value="Games" class="list_cat">Games</asp:ListItem>
@@ -283,31 +354,55 @@
                              <asp:ListItem Value="Science" class="list_cat">Science and Tech</asp:ListItem>
                              <asp:ListItem Value="Fashion" class="list_cat">Fashion & style</asp:ListItem>
                             <asp:ListItem Value="Travel" class="list_cat">Travel</asp:ListItem>
-                        </asp:DropDownList>          
-                    <asp:TextBox ID="question" runat="server"  class="que_input" placeholder="Add Question"></asp:TextBox>
-           
-               <button id="que_btn" class="que_btn" title="POST" ><i class="fas fa-pen q_icon"></i></button>
+                               <asp:ListItem Value="Others" class="list_cat" ID="others">Others</asp:ListItem>
+                        </asp:DropDownList>  
+                      
+
+                   <asp:TextBox ID="question" runat="server"  class="que_input" placeholder="Add Question"></asp:TextBox>   
+                  
+                                   
             </div>
-       </div>
+               <div class="upload">
+                   <label class="file-upload" >
+                      <i class="fas fa-camera q_icon"></i>
+                      <asp:FileUpload ID="myfile" runat="server" />
+                    </label>
+                    <button id="que_btn" runat="server" onserverclick="que_btn_ServerClick" class="que_btn" title="POST" >POST</button>
+               </div>
+
+      </div>
 
 
 
-          <div class="post_main">
+
+          
+           <asp:DataList ID="DataList1" runat="server" DataKeyField="Id" DataSourceID="SqlDataSource1"  >
+               <ItemStyle Height="20" Width="20">
+               </ItemStyle>
+               
+               <ItemTemplate>
+                      
+            <div class="post_main">
               <div class="post_header">
                   <img alt="loginImg" class="post_img" src="images/1.jpg"  />
                   <div class="post_user">
-                    <h3><asp:Label ID="username" runat="server" Text=""></asp:Label></h3>
-                    <p><asp:Label ID="university" runat="server" Text=""></asp:Label></p>
+                    <h3><asp:Label ID="username" runat="server" Text="">  <%#Eval("uname") %>  </asp:Label></h3>
+                    <p><asp:Label ID="university" runat="server" Text=""> <%#Eval("university") %></asp:Label></p>
                   </div>
                 
                 </div>
-              <hr/>
+                 <hr/>
                <div class="post_body">
-                    <h2>If tachyon particles are faster than the speed of light, then how much more is the speed of tachyon particles than light?</h2>
+                    <h2> <%#Eval("question") %></h2>
+                  <div class="que_img_pos">               
+                   <img visibility="<%# Eval("queimg") !=DBNull.Value ? "true":"false" %>" id="que_img"  src="<%# Eval("queimg") %>" class="que_img"  ></img>
+                  </div>
+                   
+
                </div>
               
                <div class="post_footer">
-               <button class="post_btn"><i class="fas fa-edit ans_button"></i> &nbsp;Add Answer</button>
+                 <button class="post_btn"><i class="fas fa-edit ans_button"></i> &nbsp;Add Answer</button>
                
                 <button class="post_btn"><i class="fas fa-eye ans_button"></i> &nbsp;View Answer</button>
 
@@ -315,51 +410,15 @@
           </div>
 
 
-        <div class="post_main">
-              <div class="post_header">
-                  <img alt="loginImg" class="post_img" src="images/1.jpg"  />
-                  <div class="post_user">
-                    <h3>Vrundan</h3>
-                    <p>Dharmsinh Desai University</p>
-                  </div>
-                
-                </div>
-              <hr/>
-               <div class="post_body">
-                    <h2>abdcacvodgjiodgjeridogjdgjre9jbolxcbm jof?</h2>
-               </div>
-              
-               <div class="post_footer">
-               <button class="post_btn"><i class="fas fa-edit ans_button"></i> &nbsp;Add Answer</button>
-               
-                <button class="post_btn"><i class="fas fa-eye ans_button"></i> &nbsp;View Answer</button>
+               </ItemTemplate>
+             </asp:DataList>
+             
+             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DiscussionForumConnectionString %>" SelectCommand="SELECT * FROM [QuestionBank]"></asp:SqlDataSource>
 
-               </div>
-          </div>
 
-      <div class="post_main">
-              <div class="post_header">
-                  <img alt="loginImg" class="post_img" src="images/1.jpg"  />
-                  <div class="post_user">
-                    <h3>Vrundan</h3>
-                    <p>Dharmsinh Desai University</p>
-                  </div>
-                
-                </div>
-              <hr/>
-               <div class="post_body">
-                    <h2>abdcacvodgjiodgjeridogjdgjre9jbolxcbm jof?</h2>
-               </div>
-              
-               <div class="post_footer">
-               <button class="post_btn"><i class="fas fa-edit ans_button"></i> &nbsp;Add Answer</button>
-               
-                <button class="post_btn"><i class="fas fa-eye ans_button"></i> &nbsp;View Answer</button>
+         </div>   
 
-               </div>
-          </div>
-     
-</div>
+
        
 
          </div>

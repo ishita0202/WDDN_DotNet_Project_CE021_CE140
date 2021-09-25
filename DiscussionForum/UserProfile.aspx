@@ -51,15 +51,34 @@
             
         }
 
-        .quecontainer {
-           
+        .file-upload {
+              cursor: pointer;  
+              margin-left:10%;
+
+            }
+
+        .file-upload input {
+              top: 0;
+              left: 0;
+              margin:0;
+              /* Loses tab index in webkit if width is set to 0 */
+              opacity: 0;
+              filter:alpha(opacity=0);
+         }
+         .upload {
+              margin-top:2%;
+              margin-left:5%;
+              display:flex;
+              justify-content:space-evenly;
+              margin-right:2%;
+         }
+
+        .img_btn {
+            border-radius:5px;
+            padding:2%;
+            background-color:gainsboro;
         }
-        .userfooter{
-           
-        }
-        .testing {
-            
-        }
+
 
      
     </style>
@@ -76,15 +95,24 @@
                  <div class="userDetails">
                      <div class="edit_profile">
                          <h2><asp:Label ID="username" runat="server" Text="ishita_0202"></asp:Label></h2> 
+                        <button id="Button1" class="edit_btn" title="Edit Profile" runat="server"  onserverclick="edit_profile" ><i class="fas fa-user-edit edit_icon"></i></button>
+             
                      </div>
                      <h4><asp:Label ID="fullname" runat="server" Text="Ishita Chauhan"></asp:Label></h4>
                      <h4><asp:Label ID="university" runat="server" Text="Dharmsinh Desai University"></asp:Label></h4>
                      <h4><asp:Label ID="email" runat="server" Text="ishitachauhan0202@gmail.com"></asp:Label></h4>
                 <div class="testing"> 
                   <div class="userfooter">
-                    <button id="img_btn" class="edit_btn" title="Edit Image"  runat="server"   onserverclick="img_change" ><i class="fas fa-camera-retro edit_icon"></i></button>
-                     <button id="edit_btn" class="edit_btn" title="Edit Profile" runat="server"  onserverclick="edit_profile" ><i class="fas fa-user-edit edit_icon"></i></button>
+            
+                    <label class="file-upload" >
+                      <i class="fas fa-camera q_icon"></i>
+                      <asp:FileUpload ID="myfile" runat="server" />
+                    </label>
+                    <button id="img_btn" class="img_btn" title="Edit Image"  runat="server"   onserverclick="img_change" >Upload Image</button>  
+                  
                  
+
+                  
                   </div>
                 </div>
              </div>

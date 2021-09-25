@@ -42,6 +42,15 @@ namespace DiscussionForum
         protected global::System.Web.UI.WebControls.TextBox TextBox1;
 
         /// <summary>
+        /// logout control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button logout;
+
+        /// <summary>
         /// avatar control.
         /// </summary>
         /// <remarks>
@@ -87,6 +96,24 @@ namespace DiscussionForum
         protected global::System.Web.UI.WebControls.DropDownList que_category;
 
         /// <summary>
+        /// default_cat control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListItem default_cat;
+
+        /// <summary>
+        /// others control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListItem others;
+
+        /// <summary>
         /// question control.
         /// </summary>
         /// <remarks>
@@ -96,21 +123,39 @@ namespace DiscussionForum
         protected global::System.Web.UI.WebControls.TextBox question;
 
         /// <summary>
-        /// username control.
+        /// myfile control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label username;
+        protected global::System.Web.UI.WebControls.FileUpload myfile;
 
         /// <summary>
-        /// university control.
+        /// que_btn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label university;
+        protected global::System.Web.UI.HtmlControls.HtmlButton que_btn;
+
+        /// <summary>
+        /// DataList1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DataList DataList1;
+
+        /// <summary>
+        /// SqlDataSource1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
     }
 }
