@@ -256,7 +256,7 @@
               top: 0;
               left: 0;
               margin: 0;
-              /* Loses tab index in webkit if width is set to 0 */
+           
               opacity: 0;
               filter:alpha(opacity=0);
             }
