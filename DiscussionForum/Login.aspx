@@ -58,24 +58,24 @@
 <body>
      <div class="login_img">
         <img alt="loginImg" class="auto-style1" src="images/1.jpg"  />
-    <form id="form1" runat="server" >
+      <form id="form1" runat="server" >
           
         <div class="container">
             <h1>Login</h1>
             <div class="login_con">
             <asp:Label ID="userLabel" runat="server" Text="Username" > <i class="far fa-user icons" >  </i></asp:Label>
             <asp:TextBox ID="username" runat="server" BorderStyle="Groove" Height="33px" Width="286px" style="margin-left: 0px" class="input_dec" placeholder="Username"></asp:TextBox>
-            <br />
+            <br/>
             <br/>
         
             <asp:Label ID="PassLabel" runat="server" Text="Passward"> <i class="fas fa-lock icons"></i></asp:Label>
             <asp:TextBox ID="pass" runat="server" BorderStyle="Groove" Height="33px" Width="286px" style="margin-left: 0px" class="input_dec" placeholder="Password"></asp:TextBox>
-            <br />
+            <br/>
             <br/>
             <asp:Button class="login_Button" ID="loginButton" runat="server" Text="Login" BackColor="#0099FF" BorderColor="Black" Height="51px" ToolTip="Click here to Login" Width="113px"   onClick="loginButton_Click"/>
              <br/>
              <br/>
-                  <asp:Label ID="register" runat="server" Text="New User?? " style="font-size:large" ></asp:Label>
+                <asp:Label ID="register" runat="server" Text="New User?? " style="font-size:large" ></asp:Label>
                 <asp:HyperLink ID="signup" runat="server" style="font-size:large" NavigateUrl="Register.aspx">Sign up</asp:HyperLink>
              </div>
             

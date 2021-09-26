@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
@@ -12,6 +13,8 @@ namespace DiscussionForum
 {
     public partial class UserProfile : System.Web.UI.Page
     {
+
+        SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["ConTest"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
         {
             username.Text = Session["uname"].ToString();
@@ -19,29 +22,43 @@ namespace DiscussionForum
             university.Text = Session["university"].ToString();
             email.Text = Session["email"].ToString();
             userimg.ImageUrl = Session["avatar"].ToString();
+            Bind();
+        }
 
+        public void Bind()
+        {
+            int id = Convert.ToInt32(Session["id"]);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM QuestionBank WHERE userid ='"+id+"'", con);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            da.Fill(ds, "QuestionBank");
+            DataList1.DataSource = ds.Tables[0];
+            DataList1.DataBind();
         }
 
         protected void img_change(object sender, EventArgs e)
         {
             //Response.Redirect("ChangeImg.aspx");
 
-            SqlConnection con = new SqlConnection();
+          
             int id = Convert.ToInt32(Session["id"]);
-            con.ConnectionString = WebConfigurationManager.ConnectionStrings["ConTest"].ConnectionString;
-            myfile.SaveAs(Server.MapPath("~/Avatar/") + id.ToString() + Path.GetFileName(myfile.FileName));
+        
+           
             try
-            {
+            {   
                 using (con)
                 {
-                    String Profile = "Avatar/" + id.ToString() + Path.GetFileName(myfile.FileName);
-                    String query = "UPDATE UserDetails SET avatar ='" + Profile + "' WHERE Id='" + id + "'";
-                    Session["avatar"] = Profile;
-                    SqlCommand cmd = new SqlCommand(query, con);
-                    con.Open();
-                    int result = cmd.ExecuteNonQuery();
-                    con.Close();
-
+                    if (myfile.HasFile)
+                    {
+                        myfile.SaveAs(Server.MapPath("~/Avatar/") + id.ToString() + Path.GetFileName(myfile.FileName));
+                        String Profile = "Avatar/" + id.ToString() + Path.GetFileName(myfile.FileName);
+                        String query = "UPDATE UserDetails SET avatar ='" + Profile + "' WHERE Id='" + id + "'";
+                        Session["avatar"] = Profile;
+                        SqlCommand cmd = new SqlCommand(query, con);
+                        con.Open();
+                        int result = cmd.ExecuteNonQuery();
+                        con.Close();
+                    }
                 }
 
             }

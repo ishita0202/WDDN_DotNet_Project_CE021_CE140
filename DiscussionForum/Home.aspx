@@ -282,21 +282,14 @@
 
              }
 
-            
+            .error_post {
+                 margin-left:25%;
+              
+            }
         </style>
 
 
-        <script>
-
-
-
-            document.querySelector('img.que_img').addEventListener('load', function ( e) {
-                // The image is ready!
-                if
-            });
-
-        </script>
-
+      
 </head>
 <body>
   
@@ -340,6 +333,7 @@
 
       <div class="post_container">
              <div class="search_con">
+                 <asp:Label ID="error_post"  class="error_post" runat="server" Text="" Visible="false"></asp:Label>
                   <div class="que_post">
       
                         <asp:DropDownList class="category" ID="que_category" runat="server">     
@@ -376,7 +370,7 @@
 
 
           
-           <asp:DataList ID="DataList1" runat="server" DataKeyField="Id" DataSourceID="SqlDataSource1"  >
+           <asp:DataList ID="DataList1" runat="server"   >
                <ItemStyle Height="20" Width="20">
                </ItemStyle>
                
@@ -405,7 +399,8 @@
                  <button class="post_btn"><i class="fas fa-edit ans_button"></i> &nbsp;Add Answer</button>
                
                 <button class="post_btn"><i class="fas fa-eye ans_button"></i> &nbsp;View Answer</button>
-
+                <button class="post_btn" id="notsavepost"   onserverclick="notsavepost"><i class="far fa-bookmark ans_button"></i> </button>
+                <button class="post_btn" id="savepost"  onserverclick="savepost"><i class="fas fa-bookmark ans_button"></i> </button>
                </div>
           </div>
 
@@ -413,7 +408,7 @@
                </ItemTemplate>
              </asp:DataList>
              
-             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DiscussionForumConnectionString %>" SelectCommand="SELECT * FROM [QuestionBank]"></asp:SqlDataSource>
+             <%--<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DiscussionForumConnectionString %>" SelectCommand="SELECT * FROM [QuestionBank]"></asp:SqlDataSource>--%>
 
 
          </div>   

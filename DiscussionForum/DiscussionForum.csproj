@@ -68,7 +68,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Avatar\Default.jpg" />
-    <Content Include="ChangeImg.aspx" />
     <Content Include="EditUser.aspx" />
     <Content Include="Home.aspx" />
     <Content Include="images\1.jpg" />
@@ -80,13 +79,6 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChangeImg.aspx.cs">
-      <DependentUpon>ChangeImg.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ChangeImg.aspx.designer.cs">
-      <DependentUpon>ChangeImg.aspx</DependentUpon>
-    </Compile>
     <Compile Include="EditUser.aspx.cs">
       <DependentUpon>EditUser.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
