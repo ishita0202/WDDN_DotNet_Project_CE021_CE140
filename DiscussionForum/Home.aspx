@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="DiscussionForum.Home" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="DiscussionForum.Home" EnableEventValidation="false" %>
 
 <!DOCTYPE html>
 
@@ -211,9 +211,9 @@
             }
             .post_footer {
                margin-top:1.5%;
-               justify-content:space-between;
+                display:inline;
                align-items:center;
-               display:flex;
+            
                
 
 
@@ -232,8 +232,18 @@
                 border:none;
                 background-color:white;
                 cursor:pointer;
+                margin-left:2%;
+                margin-right:12%;
             }
-
+            .save_btn {
+                border:none;
+                background-color:white;
+                cursor:pointer;
+               
+                float:right;
+               
+               
+            }
             .search_con {
                 border:1px solid black;
                 padding:2%;
@@ -286,6 +296,7 @@
                  margin-left:25%;
               
             }
+            
         </style>
 
 
@@ -370,7 +381,7 @@
 
 
           
-           <asp:DataList ID="DataList1" runat="server"   >
+           <asp:DataList ID="DataList1" runat="server"  OnItemCommand="DataList1_ItemCommand" >
                <ItemStyle Height="20" Width="20">
                </ItemStyle>
                
@@ -378,7 +389,7 @@
                       
             <div class="post_main">
               <div class="post_header">
-                  <img alt="loginImg" class="post_img" src="images/1.jpg"  />
+                  <img alt="loginImg" class="post_img" src="<%#Eval("userimg") %>"></img>
                   <div class="post_user">
                     <h3><asp:Label ID="username" runat="server" Text="">  <%#Eval("uname") %>  </asp:Label></h3>
                     <p><asp:Label ID="university" runat="server" Text=""> <%#Eval("university") %></asp:Label></p>
@@ -388,6 +399,7 @@
                  <hr/>
                <div class="post_body">
                     <h2> <%#Eval("question") %></h2>
+                   <asp:Label ID="qid" runat="server" Text='<%#Eval("Id") %>' Visible="false"></asp:Label>
                   <div class="que_img_pos">               
                    <img visibility="<%# Eval("queimg") !=DBNull.Value ? "true":"false" %>" id="que_img"  src="<%# Eval("queimg") %>" class="que_img"  ></img>
                   </div>
@@ -396,11 +408,12 @@
                </div>
               
                <div class="post_footer">
-                 <button class="post_btn"><i class="fas fa-edit ans_button"></i> &nbsp;Add Answer</button>
-               
-                <button class="post_btn"><i class="fas fa-eye ans_button"></i> &nbsp;View Answer</button>
-                <button class="post_btn" id="notsavepost"   onserverclick="notsavepost"><i class="far fa-bookmark ans_button"></i> </button>
-                <button class="post_btn" id="savepost"  onserverclick="savepost"><i class="fas fa-bookmark ans_button"></i> </button>
+                <i class="fas fa-edit ans_button"></i> <asp:Button class="post_btn" id="addans"  runat="server" text="Add Answer" CommandName="addans" />
+              
+                <i class="fas fa-eye ans_button"></i>  <asp:Button class="post_btn" id="viewans"  runat="server" text="View Answer" CommandName="viewans" />
+                
+                <asp:Button class="save_btn" id="savepost"  runat="server" text="Save" CommandName="savepost" />
+           <%--    <button class="post_btn" id="savepost" runat="server"  onserverclick="savepost"><i class="fas fa-bookmark ans_button"></i> </button>--%>
                </div>
           </div>
 

@@ -67,6 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AddAnswer.aspx" />
     <Content Include="Avatar\Default.jpg" />
     <Content Include="EditUser.aspx" />
     <Content Include="Home.aspx" />
@@ -76,9 +77,17 @@
     <Content Include="Login.aspx" />
     <Content Include="Register.aspx" />
     <Content Include="UserProfile.aspx" />
+    <Content Include="ViewAnswer.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddAnswer.aspx.cs">
+      <DependentUpon>AddAnswer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddAnswer.aspx.designer.cs">
+      <DependentUpon>AddAnswer.aspx</DependentUpon>
+    </Compile>
     <Compile Include="EditUser.aspx.cs">
       <DependentUpon>EditUser.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -114,6 +123,13 @@
     </Compile>
     <Compile Include="UserProfile.aspx.designer.cs">
       <DependentUpon>UserProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewAnswer.aspx.cs">
+      <DependentUpon>ViewAnswer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewAnswer.aspx.designer.cs">
+      <DependentUpon>ViewAnswer.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

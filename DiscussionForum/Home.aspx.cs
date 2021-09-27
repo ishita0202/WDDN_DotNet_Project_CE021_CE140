@@ -23,8 +23,8 @@ namespace DiscussionForum
             username1.Text = (Session["fname"].ToString() + Session["lname"].ToString());
             university1.Text = (Session["university"].ToString());
 
-           
-                Bind();
+             if(!IsPostBack)
+             Bind();
             
            
 
@@ -51,6 +51,7 @@ namespace DiscussionForum
             int id = Convert.ToInt32(Session["id"]);
             String uname = Convert.ToString(Session["uname"]);
             String university = Convert.ToString(Session["university"]);
+            String userimg = Convert.ToString(Session["avatar"]);
             myfile.SaveAs(Server.MapPath("~/QuesImages/") + id.ToString() + Path.GetFileName(myfile.FileName));
 
             String Profile = "QuesImages/" + id.ToString() + Path.GetFileName(myfile.FileName);
@@ -85,11 +86,6 @@ namespace DiscussionForum
                     con.Close();
 
 
-
-
-
-
-
                 }
                 catch (Exception err)
                 {
@@ -111,11 +107,11 @@ namespace DiscussionForum
 
                             if (Path.GetFileName(myfile.FileName) != "")
                             {
-                                query = "INSERT INTO QuestionBank (userid,question,uname,university,category,queimg) VALUES ('" + id + "', '" + question.Text + "', '" + uname + "','" + university + "','" + que_category.SelectedValue + "','" + Profile + "' )";
+                                query = "INSERT INTO QuestionBank (userid,question,uname,university,category,queimg,userimg) VALUES ('" + id + "', '" + question.Text + "', '" + uname + "','" + university + "','" + que_category.SelectedValue + "','" + Profile + "','" +userimg + "' )";
                             }
                             else
                             {
-                                query = "INSERT INTO QuestionBank (userid,question,uname,university,category) VALUES ('" + id + "', '" + question.Text + "', '" + uname + "','" + university + "','" + que_category.SelectedValue + "')";
+                                query = "INSERT INTO QuestionBank (userid,question,uname,university,category,userimg) VALUES ('" + id + "', '" + question.Text + "', '" + uname + "','" + university + "','" + que_category.SelectedValue + "','" + userimg + "')";
 
                             }
                             SqlCommand cmd = new SqlCommand(query, con);
@@ -172,11 +168,80 @@ namespace DiscussionForum
 
 
 
-        protected void notsavepost(object sender, EventArgs e) { 
-        }
-        protected void savepost(object sender, EventArgs e) { 
-        
-        
+       
+
+       
+
+        protected void DataList1_ItemCommand(object source, DataListCommandEventArgs e)
+        {
+
+            if (e.CommandName == "savepost")
+            {
+                DataListItem item = (DataListItem)((Button)e.CommandSource).NamingContainer;
+                Label text = ((Label)item.FindControl("qid"));
+                // text.Visible = true;
+
+
+
+                int qid = Convert.ToInt32(text.Text);
+
+                int id = Convert.ToInt32(Session["id"]);
+                String query1 = "SELECT * FROM SavedPost WHERE userid='" + id + "' AND  questionid='" + qid + "'";
+                SqlCommand cmd1 = new SqlCommand(query1, con);
+                con.Open();
+                SqlDataReader rdr = cmd1.ExecuteReader();
+
+
+                String query;
+                if (rdr.HasRows)
+                {
+                    query = "DELETE FROM SavedPost WHERE userid='" + id + "' AND  questionid='" + qid + "'";
+                    Button button = (Button)item.FindControl("savepost");
+                    button.Text = "Save";
+
+                }
+                else
+                {
+
+
+                    query = "INSERT INTO SavedPost (questionid,userid) VALUES ('" + text.Text + "','" + id + "')";
+                    Button button = (Button)item.FindControl("savepost");
+                    button.Text = "Unsave";
+
+                }
+
+                cmd1.Dispose();
+                con.Close();
+                SqlCommand cmd = new SqlCommand(query, con);
+                con.Open();
+                int result = cmd.ExecuteNonQuery();
+                con.Close();
+
+            }
+            else if (e.CommandName == "addans")
+            {
+                DataListItem item = (DataListItem)((Button)e.CommandSource).NamingContainer;
+                Label text = ((Label)item.FindControl("qid"));
+               
+                Response.Redirect("AddAnswer.aspx?qid=" + text.Text  );
+
+
+            }
+
+            else if (e.CommandName == "viewans") {
+                DataListItem item = (DataListItem)((Button)e.CommandSource).NamingContainer;
+                Label text = ((Label)item.FindControl("qid"));
+
+                Response.Redirect("ViewAnswer.aspx?qid=" + text.Text);
+
+            }
+
+
+
+
+
+
+
         }
     }
 }
