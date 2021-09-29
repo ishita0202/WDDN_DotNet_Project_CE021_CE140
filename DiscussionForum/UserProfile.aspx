@@ -168,12 +168,29 @@
 
 
              }
+               .post_img {
+                  width:3vw;
+                  height:6vh;
+                  border-radius:50%;
+            }
+               .post_user{
+                display:flex;
+                flex-direction:column;
+                margin-left:2%;
+                 padding:0.5%;
+                 
+            }
+            .post_header {
+                display:flex;
+                margin-bottom:1%
+            }
     </style>
 
     
 </head>
 <body>
     <form id="form1" runat="server">
+        <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Home.aspx">Home</asp:HyperLink>
         <div class="container">
             <div class="usercontainer">
                  <asp:Image ID="userimg"  class="userImg" runat="server" />
@@ -200,11 +217,9 @@
 
          <div class="active">              
               <div class="navitem">
-                    <asp:BulletedList ID="BulletedList1" runat="server" >
-                        <asp:ListItem Value="" class="nav">Questions</asp:ListItem>
-                        <asp:ListItem Value="" class="nav">Answers</asp:ListItem>
-                        <asp:ListItem Value="" class="nav">Saved</asp:ListItem>
-                    </asp:BulletedList>
+                     <asp:Button ID="question" runat="server" Text="Questions"  class="nav" OnClick="question_Click" />
+                   <asp:Button ID="answer" runat="server" Text="Answers"  class="nav" OnClick="answer_Click"/>
+                   <asp:Button ID="saved" runat="server" Text="Saved"  class="nav" OnClick="saved_Click" />
               </div>     
          </div>
 
@@ -214,23 +229,82 @@
             
                <ItemTemplate>
                       
-                <div class="post_main">
-             
+           <div class="post_main">   
                    <div class="post_body">
                        <h2> <%#Eval("question") %></h2>
                        <div class="que_img_pos">               
                             <img visibility="<%# Eval("queimg") !=DBNull.Value ? "true":"false" %>" id="que_img"  src="<%# Eval("queimg") %>" class="que_img"  ></img>
                        </div>
                    </div>
-              
                    <div class="post_footer">
-                        <button class="post_btn"><i class="fas fa-eye ans_button"></i> &nbsp;View Answer</button>
+                        <button class="post_btn" runat="server"><i class="fas fa-eye ans_button"></i> &nbsp;View Answer</button>
                    </div>
-                </div>
+            </div>
 
 
                </ItemTemplate>
           </asp:DataList>
+
+
+
+
+
+
+
+          <asp:DataList ID="DataList2" runat="server"   >
+            
+           <ItemTemplate>
+          <div class="post_main" >     
+              <div class="post_header">
+                  <img alt="loginImg" class="post_img" src="<%#Eval("queuserimg") %>"></img>
+                  <div class="post_user">
+                    <h3><asp:Label ID="username" runat="server" Text="">  <%#Eval("queuname") %>  </asp:Label></h3>
+                    <p><asp:Label ID="university" runat="server" Text=""> <%#Eval("queuniversity") %></asp:Label></p>
+                  </div>
+                </div>
+              <hr/>
+                   <div class="post_body">
+                       <h2> <%#Eval("question") %></h2>
+                       <div class="que_img_pos">               
+                            <img visibility="<%# Eval("questionimg") !=DBNull.Value ? "true":"false" %>" id="que1_img"  src="<%# Eval("questionimg") %>" class="que_img"  ></img>
+                       </div>
+                      
+                   </div>
+               <h3> <%#Eval("answer") %></h3>
+           </div>
+
+       
+            </ItemTemplate>
+          </asp:DataList>
+
+
+           <asp:DataList ID="DataList3" runat="server"   >
+            
+           <ItemTemplate>
+           <div class="post_main"> 
+                <div class="post_header">
+                  <img alt="loginImg" class="post_img" src="<%#Eval("userimg") %>"></img>
+                  <div class="post_user">
+                    <h3><asp:Label ID="username" runat="server" Text="">  <%#Eval("uname") %>  </asp:Label></h3>
+                    <p><asp:Label ID="university" runat="server" Text=""> <%#Eval("university") %></asp:Label></p>
+                  </div>
+                
+                </div>
+                 <hr/>
+                   <div class="post_body" >
+                       <h2> <%#Eval("question") %></h2>
+                       <div class="que_img_pos">               
+                            <img visibility="<%# Eval("questionimg") !=DBNull.Value ? "true":"false" %>" id="que2_img"  src="<%# Eval("questionimg") %>" class="que_img"  ></img>
+                       </div>
+
+                    </div>
+                <div class="post_footer">
+                        <button class="post_btn" runat="server"><i class="fas fa-eye ans_button"></i> &nbsp;View Answer</button>
+                   </div>
+          </div>
+            </ItemTemplate>
+          </asp:DataList>
+
 
         
 

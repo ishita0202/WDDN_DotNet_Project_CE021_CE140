@@ -22,6 +22,7 @@ namespace DiscussionForum
             university.Text = Session["university"].ToString();
             email.Text = Session["email"].ToString();
             userimg.ImageUrl = Session["avatar"].ToString();
+            if(!IsPostBack)
             Bind();
         }
 
@@ -34,15 +35,53 @@ namespace DiscussionForum
             da.Fill(ds, "QuestionBank");
             DataList1.DataSource = ds.Tables[0];
             DataList1.DataBind();
+
+            DataList2.DataSource = null;
+            DataList2.DataBind();
+
+            DataList3.DataSource = null;
+            DataList3.DataBind();
+        }
+
+        public void Bind1()
+        {
+            int id = Convert.ToInt32(Session["id"]);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Answer WHERE userid ='" + id + "'", con);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            da.Fill(ds, "Answer");
+            DataList2.DataSource = ds.Tables[0];
+            DataList2.DataBind();
+
+
+            DataList1.DataSource = null;
+            DataList1.DataBind();
+
+            DataList3.DataSource = null;
+            DataList3.DataBind();
+        }
+
+        public void Bind2()
+        {
+            int id = Convert.ToInt32(Session["id"]);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM SavedPost WHERE userid ='" + id + "'", con);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            da.Fill(ds, "SavedPost");
+            DataList3.DataSource = ds.Tables[0];
+            DataList3.DataBind();
+
+
+            DataList1.DataSource = null;
+            DataList1.DataBind();
+
+            DataList2.DataSource = null;
+            DataList2.DataBind();
         }
 
         protected void img_change(object sender, EventArgs e)
-        {
-            //Response.Redirect("ChangeImg.aspx");
-
-          
-            int id = Convert.ToInt32(Session["id"]);
-        
+        {           
+            int id = Convert.ToInt32(Session["id"]);      
            
             try
             {   
@@ -58,6 +97,41 @@ namespace DiscussionForum
                         con.Open();
                         int result = cmd.ExecuteNonQuery();
                         con.Close();
+
+
+                        query = "UPDATE QuestionBank SET userimg='" + Profile + "' WHERE userid='" + id + "'";
+                        SqlCommand cmd1 = new SqlCommand(query, con);
+                       // Response.Write(query);
+
+                        con.Open();
+                        int result1 = cmd1.ExecuteNonQuery();
+                        con.Close();
+
+
+                        query = "UPDATE Answer SET userimg='" + Profile + "' WHERE userid='" + id + "'";
+                       // Response.Write(query);
+                        SqlCommand cmd2 = new SqlCommand(query, con);
+                        con.Open();
+                        int result2 = cmd2.ExecuteNonQuery();
+                        con.Close();
+
+
+                        query = "UPDATE SavedPost SET userimg='" + Profile + "' WHERE saveuserid='" + id + "'";
+                      //  Response.Write(query);
+                        SqlCommand cmd3 = new SqlCommand(query, con);
+                        con.Open();
+                        int result3 = cmd3.ExecuteNonQuery();
+                        con.Close();
+
+
+                        query = "UPDATE Answer SET queuserimg='" + Profile + "' WHERE queuserid='" + id + "'";
+                       // Response.Write(query);
+                        SqlCommand cmd4 = new SqlCommand(query, con);
+                        con.Open();
+                        int result4 = cmd4.ExecuteNonQuery();
+                        con.Close();
+
+
                     }
                 }
 
@@ -67,7 +141,7 @@ namespace DiscussionForum
                 Response.Write(err.Message);
             }
 
-            Response.Redirect("UserProfile.aspx");
+              Response.Redirect("UserProfile.aspx");
 
         }
 
@@ -77,6 +151,19 @@ namespace DiscussionForum
             Response.Redirect("EditUser.aspx");
         }
 
-        
+        protected void question_Click(object sender, EventArgs e)
+        {
+            Bind();
+        }
+
+        protected void answer_Click(object sender, EventArgs e)
+        {
+            Bind1();
+        }
+
+        protected void saved_Click(object sender, EventArgs e)
+        {
+            Bind2();
+        }
     }
 }

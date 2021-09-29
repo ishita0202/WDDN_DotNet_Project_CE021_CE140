@@ -55,27 +55,50 @@ namespace DiscussionForum
             String university = Convert.ToString(Session["university"]);
             int qid = Convert.ToInt32(Request.QueryString["qid"].ToString());
             String userimg = Convert.ToString(Session["avatar"]);
-            
+            String question="";
+            String questionimg="",queuname="",queuserimg="",queuniversity="";
 
+               
+                
+          
             try
             {   
                 using (con)
                 {
-                    String query = "INSERT INTO Answer (answer,userid,questionid,uname,university,userimg) VALUES ('" + Answer.Value + "','" + id + "','" + qid + "','" + username + "','" + university + "','" + userimg + "')";
-                  //  Response.Write(query);       
-                    SqlCommand cmd = new SqlCommand(query, con);
-                 //   Response.Write(query);
+
+                    String query1 = "SELECT * FROM QuestionBank WHERE Id='" + qid + "'";
+                    SqlDataAdapter da;
+                    DataTable dt = new DataTable();
+                    DataRow dr;
                     con.Open();
-                 //   Response.Write(query);
+                    da = new SqlDataAdapter(query1, con);
+                    da.Fill(dt);
+                    dr = dt.Rows[0];
+                    question = dr["question"].ToString();
+                    questionimg = dr["queimg"].ToString();
+                    queuname = dr["uname"].ToString();
+                    queuserimg = dr["userimg"].ToString();
+                    queuniversity = dr["university"].ToString();
+                    int queid = Convert.ToInt32(dr["userid"]);
+                    con.Close();
+
+                    String query = "INSERT INTO Answer (answer,userid,questionid,uname,university,userimg,question,questionimg,queuname,queuserimg,queuniversity,queuserid) VALUES ('" + Answer.Value + "','" + id + "','" + qid + "','" + username + "','" + university + "','" + userimg + "','" +question  + "','" + questionimg + "','" + queuname + "','" + queuserimg + "','" + queuniversity + "','" + queid + "')";
+                    //Response.Write(query);       
+                    SqlCommand cmd = new SqlCommand(query, con);
+                   // Response.Write(query);
+                    con.Open();
+                   // Response.Write(query);
                     int result = cmd.ExecuteNonQuery();
-                 //  Response.Write(query);
+                   // Response.Write(query);
                     con.Close();
                 }
                 
             }
-            catch(Exception err) {
+            catch (Exception err)
+            {
                 Response.Write(err.Message);
             }
+
 
             Response.Redirect("Home.aspx");
 

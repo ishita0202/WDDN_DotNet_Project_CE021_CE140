@@ -1,9 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\DiscussionForum",
-    "\\DiscussionForum\\Avatar"
+    "\\DiscussionForum"
   ],
-  "SelectedNode": "\\DiscussionForum\\DiscussionForum.sln",
+  "SelectedNode": "\\DiscussionForum\\Web.config",
   "PreviewInSolutionExplorer": false
 }

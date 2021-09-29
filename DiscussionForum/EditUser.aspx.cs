@@ -46,6 +46,36 @@ namespace DiscussionForum
                     int result = cmd.ExecuteNonQuery();
                     con.Close();
 
+                    query = "UPDATE QuestionBank SET uname='"+username.Text+ "', university='" + university.Text + "' WHERE userid='" + id + "'";
+                    SqlCommand cmd1 = new SqlCommand(query, con);
+                    con.Open();
+                    int result1 = cmd1.ExecuteNonQuery();
+                    con.Close();
+
+
+                    query = "UPDATE Answer SET uname='" + username.Text + "', university='" + university.Text + "'  WHERE userid='" + id + "'";
+                    SqlCommand cmd2 = new SqlCommand(query, con);
+                    con.Open();
+                    int result2 = cmd2.ExecuteNonQuery();
+                    con.Close();
+
+
+                    query = "UPDATE SavedPost SET uname='" + username.Text + "', university='" + university.Text + "'  WHERE saveuserid='" + id + "'";
+                    SqlCommand cmd3 = new SqlCommand(query, con);
+                    con.Open();
+                    int result3 = cmd3.ExecuteNonQuery();
+                    con.Close();
+
+
+                    query = "UPDATE Answer SET queuname='" + username.Text + "', queuniversity='" + university.Text + "'  WHERE queuserid='" + id + "'";
+                    SqlCommand cmd4 = new SqlCommand(query, con);
+                    con.Open();
+                    int result4 = cmd4.ExecuteNonQuery();
+                    con.Close();
+
+
+
+
                     Session["fname"] = fname.Text;
                     Session["lname"] = lname.Text;
                     Session["email"] = email.Text;

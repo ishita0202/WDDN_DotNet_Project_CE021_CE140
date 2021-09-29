@@ -8,14 +8,14 @@
 
     <style>
         .container {
-            display:flex;
-            flex-direction:column;
-            margin-top:5%;
-            align-items:center;
-            justify-content:center;
+             display:flex;
+             flex-direction:column;
+             margin-top:5%;
+             align-items:center;
+             justify-content:center;
              box-shadow: 5px 8px 6px 6px #888888;
              width:50vw;
-              margin-bottom:5%;
+             margin-bottom:5%;
              margin-left:25%;
              border-radius:10%;
              

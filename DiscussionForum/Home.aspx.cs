@@ -19,10 +19,9 @@ namespace DiscussionForum
 
 
 
-            avatar.ImageUrl = (Session["avatar"].ToString());
-            username1.Text = (Session["fname"].ToString() + Session["lname"].ToString());
-            university1.Text = (Session["university"].ToString());
-
+             avatar.ImageUrl = (Session["avatar"].ToString());
+             username1.Text = (Session["fname"].ToString() + Session["lname"].ToString());
+             university1.Text = (Session["university"].ToString());
              if(!IsPostBack)
              Bind();
             
@@ -186,12 +185,31 @@ namespace DiscussionForum
                 int qid = Convert.ToInt32(text.Text);
 
                 int id = Convert.ToInt32(Session["id"]);
+
+                String question = "", questionimg = "", uname = "", userimg = "", university = "";
+                String query2 = "SELECT * FROM QuestionBank WHERE Id='" + qid + "'";
+
+                SqlDataAdapter da;
+                DataTable dt = new DataTable();
+                DataRow dr;
+                con.Open();
+                da = new SqlDataAdapter(query2, con);
+                da.Fill(dt);
+                dr = dt.Rows[0];
+                int uid = Convert.ToInt32(dr["userid"]);
+                uname = dr["uname"].ToString();
+                university = dr["university"].ToString();
+                question = dr["question"].ToString();
+                questionimg = dr["queimg"].ToString();
+                userimg = dr["userimg"].ToString();
+                con.Close();
+
                 String query1 = "SELECT * FROM SavedPost WHERE userid='" + id + "' AND  questionid='" + qid + "'";
                 SqlCommand cmd1 = new SqlCommand(query1, con);
                 con.Open();
                 SqlDataReader rdr = cmd1.ExecuteReader();
 
-
+                
                 String query;
                 if (rdr.HasRows)
                 {
@@ -202,9 +220,9 @@ namespace DiscussionForum
                 }
                 else
                 {
-
-
-                    query = "INSERT INTO SavedPost (questionid,userid) VALUES ('" + text.Text + "','" + id + "')";
+                    
+                    
+                    query = "INSERT INTO SavedPost (questionid,userid,question,questionimg,uname,userimg,university,saveuserid) VALUES ('" + text.Text + "','" + id + "','" + question + "','" + questionimg + "','" + uname + "','" + userimg + "','" + university + "','" + uid + "')";
                     Button button = (Button)item.FindControl("savepost");
                     button.Text = "Unsave";
 
