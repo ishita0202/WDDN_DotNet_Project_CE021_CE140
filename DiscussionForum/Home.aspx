@@ -319,8 +319,8 @@
                 </asp:BulletedList>
           </div>     
           <div class="search_pos">
-              <asp:TextBox ID="TextBox1" runat="server" class="search" placeholder="Search here..."></asp:TextBox>
-              <button class="bsearch"><i class="fas fa-search search_button"></i></button>
+              <asp:TextBox ID="TextBox1" runat="server" class="search" placeholder="Search here..." ></asp:TextBox>
+              <button class="bsearch" onserverclick="search_btn"  runat="server"  ><i class="fas fa-search search_button"></i></button>
              
           </div>
           <asp:Button ID="logout" runat="server" Text="Logout"  class="nav" OnClick="logout_Click"/>

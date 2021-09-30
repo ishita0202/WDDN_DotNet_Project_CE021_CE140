@@ -31,7 +31,7 @@ namespace DiscussionForum
         }
         public void Bind()
         {
-            SqlCommand cmd = new SqlCommand("SELECT * FROM QuestionBank ", con);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM QuestionBank ORDER BY Id DESC ", con);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             da.Fill(ds, "QuestionBank");
@@ -261,5 +261,14 @@ namespace DiscussionForum
 
 
         }
+
+
+        protected void search_btn(object sender, EventArgs e)
+        {
+           
+
+            Response.Redirect("Search.aspx?query=" + TextBox1.Text);
+        }
+
     }
 }

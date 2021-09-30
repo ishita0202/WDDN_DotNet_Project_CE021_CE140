@@ -225,7 +225,7 @@
 
 
          
-         <asp:DataList ID="DataList1" runat="server"   >
+         <asp:DataList ID="DataList1" runat="server"  OnItemCommand="DataList1_ItemCommand" >
             
                <ItemTemplate>
                       
@@ -237,7 +237,9 @@
                        </div>
                    </div>
                    <div class="post_footer">
-                        <button class="post_btn" runat="server"><i class="fas fa-eye ans_button"></i> &nbsp;View Answer</button>
+                         <asp:Label ID="qid" runat="server" Text='<%#Eval("Id") %>' Visible="false"></asp:Label>
+                        <i class="fas fa-eye ans_button"></i>  <asp:Button class="post_btn" id="viewans"  runat="server" text="View Answer" CommandName="viewans" />
+                        <i class="fas fa-trash-alt ans_button"></i><asp:Button class="post_btn" id="delete"  runat="server" text="Delete Question" CommandName="delete" />
                    </div>
             </div>
 
@@ -251,7 +253,7 @@
 
 
 
-          <asp:DataList ID="DataList2" runat="server"   >
+          <asp:DataList ID="DataList2" runat="server"  onItemCommand="DataList2_ItemCommand" >
             
            <ItemTemplate>
           <div class="post_main" >     
@@ -271,14 +273,18 @@
                       
                    </div>
                <h3> <%#Eval("answer") %></h3>
-           </div>
+              <div class="post_footer">
+                    <asp:Label ID="aid" runat="server" Text='<%#Eval("Id") %>' Visible="false"></asp:Label>
+                   <i class="fas fa-trash-alt ans_button"></i><asp:Button class="post_btn" id="delete"  runat="server" text="Delete Answer" CommandName="delete" />
+              </div>
+              </div>
 
        
             </ItemTemplate>
           </asp:DataList>
 
 
-           <asp:DataList ID="DataList3" runat="server"   >
+           <asp:DataList ID="DataList3" runat="server"    OnItemCommand="DataList3_ItemCommand">
             
            <ItemTemplate>
            <div class="post_main"> 
@@ -299,7 +305,9 @@
 
                     </div>
                 <div class="post_footer">
-                        <button class="post_btn" runat="server"><i class="fas fa-eye ans_button"></i> &nbsp;View Answer</button>
+                       <asp:Label ID="qid1" runat="server" Text='<%#Eval("questionid") %>' Visible="false"></asp:Label>
+                      <i class="fas fa-edit ans_button"></i> <asp:Button class="post_btn" id="addans1"  runat="server" text="Add Answer" CommandName="addans" />
+                      <i class="fas fa-eye ans_button"></i>  <asp:Button class="post_btn" id="viewans1"  runat="server" text="View Answer" CommandName="viewans" />
                    </div>
           </div>
             </ItemTemplate>

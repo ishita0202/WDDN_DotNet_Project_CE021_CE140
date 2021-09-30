@@ -29,7 +29,7 @@ namespace DiscussionForum
         public void Bind()
         {
             int id = Convert.ToInt32(Session["id"]);
-            SqlCommand cmd = new SqlCommand("SELECT * FROM QuestionBank WHERE userid ='"+id+"'", con);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM QuestionBank WHERE userid ='"+id+ "' ORDER BY Id DESC   ", con);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             da.Fill(ds, "QuestionBank");
@@ -46,7 +46,7 @@ namespace DiscussionForum
         public void Bind1()
         {
             int id = Convert.ToInt32(Session["id"]);
-            SqlCommand cmd = new SqlCommand("SELECT * FROM Answer WHERE userid ='" + id + "'", con);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Answer WHERE userid ='" + id + "' ORDER BY Id DESC", con);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             da.Fill(ds, "Answer");
@@ -64,7 +64,7 @@ namespace DiscussionForum
         public void Bind2()
         {
             int id = Convert.ToInt32(Session["id"]);
-            SqlCommand cmd = new SqlCommand("SELECT * FROM SavedPost WHERE userid ='" + id + "'", con);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM SavedPost WHERE userid ='" + id + "' ORDER BY Id DESC", con);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             da.Fill(ds, "SavedPost");
@@ -164,6 +164,90 @@ namespace DiscussionForum
         protected void saved_Click(object sender, EventArgs e)
         {
             Bind2();
+        }
+
+        
+
+        protected void DataList3_ItemCommand(object source, DataListCommandEventArgs e)
+        {
+            if (e.CommandName == "addans")
+            {
+                DataListItem item = (DataListItem)((Button)e.CommandSource).NamingContainer;
+                Label text = ((Label)item.FindControl("qid1"));
+                //Response.Write(text.Text);
+                Response.Redirect("AddAnswer.aspx?qid=" + text.Text);
+
+
+            }
+
+            else if (e.CommandName == "viewans")
+            {
+                DataListItem item = (DataListItem)((Button)e.CommandSource).NamingContainer;
+                Label text = ((Label)item.FindControl("qid1"));
+                //Response.Write(text.Text);
+                Response.Redirect("ViewAnswer.aspx?qid=" + text.Text);
+
+            }
+
+          
+
+        }
+
+        protected void DataList1_ItemCommand(object source, DataListCommandEventArgs e)
+        {
+            if (e.CommandName == "viewans")
+            {
+                DataListItem item = (DataListItem)((Button)e.CommandSource).NamingContainer;
+                Label text = ((Label)item.FindControl("qid"));
+
+                Response.Redirect("ViewAnswer.aspx?qid=" + text.Text);
+
+            }
+            else if (e.CommandName == "delete") {
+                DataListItem item = (DataListItem)((Button)e.CommandSource).NamingContainer;
+                Label text = ((Label)item.FindControl("qid"));
+
+
+                String query = "DELETE FROM SavedPost WHERE  questionid='" + text.Text + "'";
+                SqlCommand cmd = new SqlCommand(query, con);
+                con.Open();
+                int result = cmd.ExecuteNonQuery();
+                con.Close();
+
+
+                query = "DELETE FROM Answer WHERE  questionid='" + text.Text + "'";
+                cmd = new SqlCommand(query, con);
+                con.Open();
+                result = cmd.ExecuteNonQuery();
+                con.Close();
+
+
+                query = "DELETE FROM QuestionBank WHERE  Id='" + text.Text + "'";
+                cmd = new SqlCommand(query, con);
+                con.Open();
+                result = cmd.ExecuteNonQuery();
+                con.Close();
+
+
+                Bind();
+
+            }
+
+        }
+
+        protected void DataList2_ItemCommand(object source, DataListCommandEventArgs e)
+        {
+            if(e.CommandName == "delete")
+            {
+                DataListItem item = (DataListItem)((Button)e.CommandSource).NamingContainer;
+                Label text = ((Label)item.FindControl("aid"));
+                String query = "DELETE FROM Answer WHERE  Id='" + text.Text + "'";
+                SqlCommand cmd = new SqlCommand(query, con);
+                con.Open();
+                int result = cmd.ExecuteNonQuery();
+                con.Close();
+                Bind1();
+            }
         }
     }
 }
