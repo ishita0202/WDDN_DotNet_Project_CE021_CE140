@@ -61,18 +61,24 @@
       <form id="form1" runat="server" >
           
         <div class="container">
+            <asp:Label ID="loginerr" runat="server" Visible="false" ></asp:Label>
             <h1>Login</h1>
+
             <div class="login_con">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:Label ID="userLabel" runat="server" Text="Username" > <i class="far fa-user icons" >  </i></asp:Label>
-            <asp:TextBox ID="username" runat="server" BorderStyle="Groove" Height="33px" Width="286px" style="margin-left: 0px" class="input_dec" placeholder="Username"></asp:TextBox>
+            <asp:TextBox ID="username" runat="server" BorderStyle="Groove" Height="33px" Width="286px" style="margin-left: 0px" class="input_dec" placeholder="Username" OnTextChanged="username_TextChanged"></asp:TextBox>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ErrorMessage="Enter username" ControlToValidate="username"></asp:RequiredFieldValidator>
+               
             <br/>
             <br/>
-        
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:Label ID="PassLabel" runat="server" Text="Passward"> <i class="fas fa-lock icons"></i></asp:Label>
-            <asp:TextBox ID="pass" runat="server" BorderStyle="Groove" Height="33px" Width="286px" style="margin-left: 0px" class="input_dec" placeholder="Password"></asp:TextBox>
+            <asp:TextBox ID="pass" runat="server" TextMode="Password" BorderStyle="Groove" Height="33px" Width="286px" style="margin-left: 0px" class="input_dec" placeholder="Password"></asp:TextBox>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Enter password" ControlToValidate="pass"></asp:RequiredFieldValidator>
+              <br/>
             <br/>
-            <br/>
-            <asp:Button class="login_Button" ID="loginButton" runat="server" Text="Login" BackColor="#0099FF" BorderColor="Black" Height="51px" ToolTip="Click here to Login" Width="113px"   onClick="loginButton_Click"/>
+            <asp:Button class="login_Button" ID="loginButton" runat="server" Text="Login" BackColor="#0099FF" BorderColor="Black" Height="51px" ToolTip="Click here to Login" Width="113px" onClick="loginButton_Click"/>
              <br/>
              <br/>
                 <asp:Label ID="register" runat="server" Text="New User?? " style="font-size:large" ></asp:Label>

@@ -14,7 +14,10 @@ namespace DiscussionForum
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Convert.ToInt32(Request.QueryString["auth"]) == 1) { 
+                loginerr.Visible = true;
+                loginerr.Text = "Please Login to continue";
+            }
         }
 
         protected void loginButton_Click(object sender, EventArgs e)
@@ -63,6 +66,11 @@ namespace DiscussionForum
                 userLabel.Text = "Error Reading Data:" + err.Message;
             }
            
+
+        }
+
+        protected void username_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }

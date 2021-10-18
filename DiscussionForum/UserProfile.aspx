@@ -8,12 +8,77 @@
 
     <title></title>
 
-    <style>
+    <style>  
+            * {
+            margin:0;
+            padding:0;
+            }
+            .main {
+                display:flex;
+                flex-direction:column;
+            }
+           .activenav{  
+              overflow: hidden;
+              background-color:darkslateblue;
+              display: flex;
+              width: 100%;
+              height: 9vh;
+              z-index: 3;
+              align-items:center;
+              justify-content:space-evenly;
+              position:fixed;
+            }
+
+            .nav {
+              display: inline-block;
+              color: white;
+              text-align: center;
+              padding: 1.4vw 1.6vw;
+              text-decoration: none;
+              font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+              font-size:x-large;
+              background-color:darkslateblue;
+              border:none;
+              
+            }
+             .nav:hover {
+                 background-color: rgb(40 31 91);
+               
+             }
+            .navitem {
+               display:flex;
+               
+            }
+            .search {
+                padding:2%;
+                border-radius:0.4vw;
+                font-weight:300;
+                width:30vw;
+            }
+
+        .search_pos {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+               .search_button {
+                color:white;
+               
+                font-size:x-large;
+            }
+            .bsearch {
+                background-color:darkslateblue;
+                border:none;
+                margin-left:3%;
+                cursor:pointer;
+
+            }
         .container {
             display:flex;
             flex-direction:column;
             align-items:center;            
-            margin-top:2%;
+            margin-top:8%;
+            padding:2%;
         }
         .usercontainer {
             border-radius:10px; 
@@ -22,15 +87,18 @@
             width:60%;
             align-items:center;
             height:40vh;  
+           
         }
         .userDetails {
             margin-left:10%;    
+            
         }
         .userImg {
             border-radius:10px;
             height:100%;
             width:40%;
             object-fit:cover;
+          
         }
         .edit_icon {
             margin-left:1.5vw;
@@ -54,7 +122,7 @@
         .file-upload {
               cursor: pointer;  
               margin-left:10%;
-
+               padding:2%;
             }
 
         .file-upload input {
@@ -85,7 +153,7 @@
               display: flex;
               width: 60%;
               height: 5vh;
-              z-index: 3;
+             
               align-items:center;
               justify-content:space-evenly;
              border-radius:10px;
@@ -116,10 +184,9 @@
                 margin-top:5%;
                 width:40vw;
                 border:1px solid black;
-                padding-bottom:2%;
+                padding:3%;
                 border-radius:13px;
-                padding-left:2%;
-                padding-right:2%;
+            
                 align-items:center;
                 
                
@@ -130,13 +197,16 @@
                
                 max-height:50vh;
                 margin-left:1%;
+                margin-right:1%;
                 overflow:hidden;
                 object-fit:contain;
-                
+                padding:3%;
           }
             .post_footer {
-              
-               justify-content:space-between;
+               padding-top:2%;
+               padding-left:3%;
+               padding-right:3%;
+             
                align-items:center;
                display:flex;
    
@@ -149,7 +219,12 @@
 
             .ans_button {
                 font-size:large;
-
+               margin-right:2%;
+            }
+             .ans_button1 {
+                font-size:large;
+                 margin-left:20%;
+                 margin-right:2%;
             }
             .post_btn {
                 border:none;
@@ -190,7 +265,26 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Home.aspx">Home</asp:HyperLink>
+        <div class="main">
+       <div class="activenav">
+          <div>
+              <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Home.aspx"><img alt="loginImg" class="auto-style1" src="images/logo.png"  /></asp:HyperLink>
+          </div>        
+          <div class="navitem">                
+                 <asp:DropDownList class="nav" ID="DropDownList2" runat="server" DataSourceID="SqlDataSource1" DataTextField="category" DataValueField="category">                                   
+                 </asp:DropDownList>  
+                 <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DiscussionForumConnectionString %>" SelectCommand="SELECT [category] FROM [Category]"></asp:SqlDataSource>
+                 <button class="bsearch" onserverclick="categorybtn"  runat="server"  ><i class="fas fa-search search_button"></i></button>
+
+          </div>     
+          <div class="search_pos">
+              <asp:TextBox ID="TextBox1" runat="server" class="search" placeholder="Search here..." ></asp:TextBox>
+              <button class="bsearch" onserverclick="search_btn"  runat="server"  ><i class="fas fa-search search_button"></i></button>
+             
+          </div>
+          <asp:Button ID="logout" runat="server" Text="Logout"  class="nav" OnClick="logout_Click"/>
+
+      </div>
         <div class="container">
             <div class="usercontainer">
                  <asp:Image ID="userimg"  class="userImg" runat="server" />
@@ -199,10 +293,10 @@
                           <h2><asp:Label ID="username" runat="server" Text="ishita_0202"></asp:Label></h2> 
                           <button id="Button1" class="edit_btn" title="Edit Profile" runat="server"  onserverclick="edit_profile" ><i class="fas fa-user-edit edit_icon"></i></button>       
                      </div>
-
-                     <h4><asp:Label ID="fullname" runat="server" Text="Ishita Chauhan"></asp:Label></h4>
-                     <h4><asp:Label ID="university" runat="server" Text="Dharmsinh Desai University"></asp:Label></h4>
-                     <h4><asp:Label ID="email" runat="server" Text="ishitachauhan0202@gmail.com"></asp:Label></h4>
+                      <br/>
+                     <h4><asp:Label ID="fullname" runat="server" Text="Ishita Chauhan"></asp:Label></h4><br/>
+                     <h4><asp:Label ID="university" runat="server" Text="Dharmsinh Desai University"></asp:Label></h4><br/>
+                     <h4><asp:Label ID="email" runat="server" Text="ishitachauhan0202@gmail.com"></asp:Label></h4><br/>
                   <div class="testing"> 
                         <div class="userfooter">           
                             <label class="file-upload" >
@@ -239,7 +333,7 @@
                    <div class="post_footer">
                          <asp:Label ID="qid" runat="server" Text='<%#Eval("Id") %>' Visible="false"></asp:Label>
                         <i class="fas fa-eye ans_button"></i>  <asp:Button class="post_btn" id="viewans"  runat="server" text="View Answer" CommandName="viewans" />
-                        <i class="fas fa-trash-alt ans_button"></i><asp:Button class="post_btn" id="delete"  runat="server" text="Delete Question" CommandName="delete" />
+                        <i class="fas fa-trash-alt ans_button1"></i><asp:Button class="post_btn" id="delete"  runat="server" text="Delete Question" CommandName="delete" />
                    </div>
             </div>
 
@@ -307,7 +401,7 @@
                 <div class="post_footer">
                        <asp:Label ID="qid1" runat="server" Text='<%#Eval("questionid") %>' Visible="false"></asp:Label>
                       <i class="fas fa-edit ans_button"></i> <asp:Button class="post_btn" id="addans1"  runat="server" text="Add Answer" CommandName="addans" />
-                      <i class="fas fa-eye ans_button"></i>  <asp:Button class="post_btn" id="viewans1"  runat="server" text="View Answer" CommandName="viewans" />
+                      <i class="fas fa-eye ans_button1"></i>  <asp:Button class="post_btn" id="viewans1"  runat="server" text="View Answer" CommandName="viewans" />
                    </div>
           </div>
             </ItemTemplate>
@@ -322,7 +416,7 @@
 
 
       </div>
-
+       </div>
 
     </form>
     

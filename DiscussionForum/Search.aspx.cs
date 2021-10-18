@@ -15,6 +15,13 @@ namespace DiscussionForum
         SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["ConTest"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            if (Session["uname"] == null)
+            {
+                Response.Redirect("Login.aspx?auth=1");
+            }
+
+
             if (!IsPostBack)
             {
                 String text = Request.QueryString["query"].ToString();
@@ -25,6 +32,11 @@ namespace DiscussionForum
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 da.Fill(ds, "QuestionBank");
+                if (ds.Tables[0].Rows.Count == 0)
+                {
+                    nopost.Text = "NO QUESTION FOUND";
+                    nopost.Visible = true;
+                }
                 DataList1.DataSource = ds.Tables[0];
                 DataList1.DataBind();
             }
@@ -116,5 +128,25 @@ namespace DiscussionForum
 
             }
         }
+        protected void search_btn(object sender, EventArgs e)
+        {
+
+
+            Response.Redirect("Search.aspx?query=" + TextBox1.Text);
+        }
+
+        protected void categorybtn(object sender, EventArgs e)
+        {
+
+
+            Response.Redirect("Category.aspx?query=" + DropDownList2.SelectedValue);
+        }
+        protected void logout_Click(object sender, EventArgs e)
+        {
+            Session.Abandon();
+
+            Response.Redirect("Login.aspx");
+        }
+
     }
 }

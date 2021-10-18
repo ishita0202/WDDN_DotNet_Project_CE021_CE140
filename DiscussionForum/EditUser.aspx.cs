@@ -11,9 +11,17 @@ using System.Web.UI.WebControls;
 namespace DiscussionForum
 {
     public partial class EditUser : System.Web.UI.Page
-    {
+    {   
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            if (Session["uname"] == null)
+            {
+                Response.Redirect("Login.aspx?auth=1");
+            }
+
             if (!IsPostBack)
             {
                 fname.Text = Session["fname"].ToString();
@@ -93,5 +101,7 @@ namespace DiscussionForum
 
           Response.Redirect("UserProfile.aspx");
         }
+
+        
     }
 }

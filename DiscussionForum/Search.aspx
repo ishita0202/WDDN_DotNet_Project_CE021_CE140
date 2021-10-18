@@ -7,13 +7,79 @@
     <title></title>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     
-    <style>
+    <style> 
+           * {
+            margin:0;
+            padding:0;
+            }
+            .main {
+                display:flex;
+                flex-direction:column;
+            }
+           .active{  
+              overflow: hidden;
+              background-color:darkslateblue;
+              display: flex;
+              width: 100%;
+              height: 9vh;
+              z-index: 3;
+              align-items:center;
+              justify-content:space-evenly;
+              position:fixed;
+            }
+
+            .nav {
+              display: inline-block;
+              color: white;
+              text-align: center;
+              padding: 1.4vw 1.6vw;
+              text-decoration: none;
+              font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+              font-size:x-large;
+              background-color:darkslateblue;
+              border:none;
+              
+            }
+              .bsearch {
+                background-color:darkslateblue;
+                border:none;
+                margin-left:3%;
+                cursor:pointer;
+
+            }
+
+             .nav:hover {
+                 background-color: rgb(40 31 91);
+               
+             }
+            .navitem {
+               display:flex;
+               
+            }
+            .search {
+                padding:2%;
+                border-radius:0.4vw;
+                font-weight:300;
+                width:30vw;
+            }
+
+            .search_pos {
+                display:flex;
+                flex-direction:row;
+                align-items:center;
+            }
+            .search_button {
+                color:white;
+               
+                font-size:x-large;
+            }
         .container {
             align-items:center;
             display:flex;
             flex-direction:column;
-            
+              margin-top:8%;
         }
+
 
           .post_main {
                 margin-top:5%;
@@ -98,13 +164,38 @@
                 margin-left:2%;
                 margin-right:12%;
             }
+            .nopost {
+             margin-top:12%;
+             font-size:xx-large
+        }
 
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div class="container">
+       <div class="main">
+        <div class="active">
+          <div>
+                <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Home.aspx"><img alt="loginImg" class="auto-style1" src="images/logo.png"  /></asp:HyperLink>
+          </div>        
+          <div class="navitem">                
+                 <asp:DropDownList class="nav" ID="DropDownList2" runat="server" DataSourceID="SqlDataSource1" DataTextField="category" DataValueField="category">                                   
+                 </asp:DropDownList>  
+                 <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DiscussionForumConnectionString %>" SelectCommand="SELECT [category] FROM [Category]"></asp:SqlDataSource>
+                 <button class="bsearch" onserverclick="categorybtn"  runat="server"  ><i class="fas fa-search search_button"></i></button>
 
+          </div>     
+          <div class="search_pos">
+              <asp:TextBox ID="TextBox1" runat="server" class="search" placeholder="Search here..." ></asp:TextBox>
+              <button class="bsearch" onserverclick="search_btn"  runat="server"  ><i class="fas fa-search search_button"></i></button>
+             
+          </div>
+          <asp:Button ID="logout" runat="server" Text="Logout"  class="nav" OnClick="logout_Click"/>
+
+      </div>
+
+        <div class="container">
+              <asp:Label ID="nopost" runat="server" Visible="false" class="nopost"></asp:Label>
             <asp:DataList ID="DataList1" runat="server" OnItemCommand="DataList1_ItemCommand">
                 <ItemTemplate>
             <div class="post_main">
@@ -141,6 +232,7 @@
                 </ItemTemplate>
             </asp:DataList>
         </div>
+      </div>
     </form>
 </body>
 </html>

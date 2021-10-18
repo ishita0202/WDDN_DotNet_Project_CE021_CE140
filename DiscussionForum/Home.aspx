@@ -51,6 +51,7 @@
                
              }
             .navitem {
+               display:flex;
                
             }
             .search {
@@ -268,7 +269,7 @@
               margin: 0;
            
               opacity: 0;
-              filter:alpha(opacity=0);
+             
             }
             .upload {
               margin-top:2%;
@@ -309,14 +310,14 @@
 
       <div class="active">
           <div>
-               <img alt="loginImg" class="auto-style1" src="images/logo.png"  />
+               <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Home.aspx"><img alt="loginImg" class="auto-style1" src="images/logo.png"  /></asp:HyperLink>
           </div>        
-          <div class="navitem">
-                <asp:BulletedList ID="BulletedList1" runat="server" >
-                    <asp:ListItem Value="http://www.cohowinery.com" class="nav">Home</asp:ListItem>
-                    <asp:ListItem Value="http://www.cohowinery.com" class="nav">Post</asp:ListItem>
-                    <asp:ListItem Value="http://www.cohowinery.com" class="nav">Profile</asp:ListItem>
-                </asp:BulletedList>
+          <div class="navitem">                
+                 <asp:DropDownList class="nav" ID="DropDownList2" runat="server" DataSourceID="SqlDataSource1" DataTextField="category" DataValueField="category">                                   
+                 </asp:DropDownList>  
+                 <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DiscussionForumConnectionString %>" SelectCommand="SELECT [category] FROM [Category]"></asp:SqlDataSource>
+                 <button class="bsearch" onserverclick="categorybtn"  runat="server"  ><i class="fas fa-search search_button"></i></button>
+
           </div>     
           <div class="search_pos">
               <asp:TextBox ID="TextBox1" runat="server" class="search" placeholder="Search here..." ></asp:TextBox>
@@ -347,19 +348,8 @@
                  <asp:Label ID="error_post"  class="error_post" runat="server" Text="" Visible="false"></asp:Label>
                   <div class="que_post">
       
-                        <asp:DropDownList class="category" ID="que_category" runat="server">     
-                             <asp:ListItem Value="ChooseCategory" class="list_cat" ID="default_cat" Selected="True">Choose Category</asp:ListItem>
-                             <asp:ListItem Value="Education" class="list_cat">Education</asp:ListItem>
-                             <asp:ListItem Value="Sports" class="list_cat">Sports</asp:ListItem>
-                             <asp:ListItem Value="Games" class="list_cat">Games</asp:ListItem>
-                             <asp:ListItem Value="Music" class="list_cat">Music</asp:ListItem>
-                             <asp:ListItem Value="Health" class="list_cat">Health & Fitness</asp:ListItem>
-                             <asp:ListItem Value="Business" class="list_cat">Business</asp:ListItem>
-                             <asp:ListItem Value="Food" class="list_cat">Food</asp:ListItem>
-                             <asp:ListItem Value="Science" class="list_cat">Science and Tech</asp:ListItem>
-                             <asp:ListItem Value="Fashion" class="list_cat">Fashion & style</asp:ListItem>
-                            <asp:ListItem Value="Travel" class="list_cat">Travel</asp:ListItem>
-                               <asp:ListItem Value="Others" class="list_cat" ID="others">Others</asp:ListItem>
+                        <asp:DropDownList class="category" ID="que_category" runat="server"  DataSourceID="SqlDataSource1" DataTextField="category" DataValueField="category">     
+                           
                         </asp:DropDownList>  
                       
 

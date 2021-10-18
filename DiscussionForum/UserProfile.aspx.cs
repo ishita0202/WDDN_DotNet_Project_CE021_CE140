@@ -17,6 +17,10 @@ namespace DiscussionForum
         SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["ConTest"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["uname"] == null)
+            {
+                Response.Redirect("Login.aspx?auth=1");
+            }
             username.Text = Session["uname"].ToString();
             fullname.Text = (Session["fname"].ToString() + " "+Session["lname"].ToString());
             university.Text = Session["university"].ToString();
@@ -249,5 +253,27 @@ namespace DiscussionForum
                 Bind1();
             }
         }
+
+
+        protected void search_btn(object sender, EventArgs e)
+        {
+
+
+            Response.Redirect("Search.aspx?query=" + TextBox1.Text);
+        }
+
+        protected void categorybtn(object sender, EventArgs e)
+        {
+
+
+            Response.Redirect("Category.aspx?query=" + DropDownList2.SelectedValue);
+        }
+        protected void logout_Click(object sender, EventArgs e)
+        {
+            Session.Abandon();
+
+            Response.Redirect("Login.aspx");
+        }
+
     }
 }

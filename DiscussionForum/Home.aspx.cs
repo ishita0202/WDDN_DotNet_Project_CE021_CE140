@@ -18,7 +18,9 @@ namespace DiscussionForum
         {
 
 
-
+            if (Session["uname"]==null) {
+                Response.Redirect("Login.aspx?auth=1");
+            }
              avatar.ImageUrl = (Session["avatar"].ToString());
              username1.Text = (Session["fname"].ToString() + Session["lname"].ToString());
              university1.Text = (Session["university"].ToString());
@@ -98,11 +100,7 @@ namespace DiscussionForum
                         using (con)
                         {
 
-                            if (que_category.SelectedValue == "ChooseCategory")
-                            {
-                                que_category.ClearSelection();
-                                others.Selected = true;
-                            }
+                           
 
                             if (Path.GetFileName(myfile.FileName) != "")
                             {
@@ -122,7 +120,7 @@ namespace DiscussionForum
 
                             question.Text = "";
                             que_category.ClearSelection();
-                            default_cat.Selected = true;
+                            
 
                             //System.IO.File()
 
@@ -254,12 +252,6 @@ namespace DiscussionForum
 
             }
 
-
-
-
-
-
-
         }
 
 
@@ -268,6 +260,13 @@ namespace DiscussionForum
            
 
             Response.Redirect("Search.aspx?query=" + TextBox1.Text);
+        }
+
+        protected void categorybtn(object sender, EventArgs e)
+        {
+
+
+            Response.Redirect("Category.aspx?query=" + DropDownList2.SelectedValue);
         }
 
     }

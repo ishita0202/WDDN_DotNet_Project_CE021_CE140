@@ -69,6 +69,7 @@
   <ItemGroup>
     <Content Include="AddAnswer.aspx" />
     <Content Include="Avatar\Default.jpg" />
+    <Content Include="Category.aspx" />
     <Content Include="EditUser.aspx" />
     <Content Include="Home.aspx" />
     <Content Include="images\1.jpg" />
@@ -88,6 +89,13 @@
     </Compile>
     <Compile Include="AddAnswer.aspx.designer.cs">
       <DependentUpon>AddAnswer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Category.aspx.cs">
+      <DependentUpon>Category.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Category.aspx.designer.cs">
+      <DependentUpon>Category.aspx</DependentUpon>
     </Compile>
     <Compile Include="EditUser.aspx.cs">
       <DependentUpon>EditUser.aspx</DependentUpon>
