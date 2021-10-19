@@ -18,7 +18,7 @@ namespace DiscussionForum
 
         protected void CustomValidator1_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            Response.Write(args);
+            //Response.Write(args);
             string data = args.Value;
             args.IsValid = false;
             if (data.Length > 6 && data.Length < 14 && data.Any(char.IsDigit) == true && data.Any(char.IsLower) == true && data.Any(char.IsUpper) == true)
